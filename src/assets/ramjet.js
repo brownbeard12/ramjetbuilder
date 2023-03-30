@@ -38,8 +38,8 @@ function animate() {
     camera.aspect = window.innerWidth / window.innerHeight;
     renderer.render(scene, camera);
 
-    light1.position.x -= 0.02
-    light2.position.z -= 0.02
+    light1.position.x -= 0.01
+    light2.position.z -= 0.01
 }
 
 animate();
