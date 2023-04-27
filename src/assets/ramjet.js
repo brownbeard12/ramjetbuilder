@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import GUI from 'lil-gui';
-import { HemisphereLight } from 'three';
+//import { HemisphereLight } from 'three';
 
 const gui = new GUI();
 
@@ -22,15 +22,15 @@ coneGUI.diffAngle = 2 * (180 / Math.PI) * Math.atan(coneGUI.coneRAD / coneGUI.co
 
 const scene = new THREE.Scene();
 
-const sky = new THREE.HemisphereLight(0xffffff, 0xffffff, 5);
+const sky = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
 scene.add(sky);
 
-const light1 = new THREE.PointLight(0xffffff, 20, 100);
+const light1 = new THREE.PointLight(0xffffff, 20, 1000);
 light1.position.set(-10, -1, 0);
 light1.add(new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({ color: 0xffffff })))
 scene.add(light1);
 
-const light2 = new THREE.PointLight(0xffffff, 20, 100);
+const light2 = new THREE.PointLight(0xffffff, 20, 1000);
 light2.position.set(3, 0, 8);
 light2.add(new THREE.Mesh(new THREE.SphereGeometry(0.1), new THREE.MeshBasicMaterial({ color: 0xffffff })))
 scene.add(light2);
@@ -75,7 +75,7 @@ function animate() {
     light2.position.x = 4 * Math.sin(i * Math.PI);
     light2.position.z = 4 * Math.cos(i * Math.PI);
 
-    //i += 0.001;
+    i += 0.001;
 }
 
 function regen(mesh, val) {
