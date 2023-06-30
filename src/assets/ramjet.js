@@ -31,11 +31,8 @@ loader
     texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.background = texture;
     scene.environment = texture;
+    scene.backgroundIntensity = 0.6;
   });
-
-const envText = loader
-  .setPath("src/assets/")
-  .load("kloppenheim_06_puresky_4k.hdr");
 
 const sky = new THREE.HemisphereLight(0xffffff, 0xffffff, 20);
 scene.add(sky);
@@ -77,7 +74,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 const coneGeo = new THREE.ConeGeometry(2, 4, 128, 16);
 const coneMat = new THREE.MeshPhysicalMaterial({
   color: 0xbbbcc4,
-  roughness: 0.3,
+  roughness: 0.2,
   metalness: 1.0,
 });
 let diffuser = new THREE.Mesh(coneGeo, coneMat);
@@ -89,8 +86,12 @@ let bodyOuterDiam = 8.0;
 let bodyThickness = 0.5;
 const bodyCross = [
   new THREE.Vector2(bodyOuterDiam / 2, 0),
+  new THREE.Vector2(bodyOuterDiam / 2, 0),
+  new THREE.Vector2(bodyOuterDiam / 2 - 0.5 * bodyThickness, 12),
   new THREE.Vector2(bodyOuterDiam / 2 - 0.5 * bodyThickness, 12),
   new THREE.Vector2(bodyOuterDiam / 2 - bodyThickness, 12),
+  new THREE.Vector2(bodyOuterDiam / 2 - bodyThickness, 12),
+  new THREE.Vector2(bodyOuterDiam / 2 - bodyThickness, 0),
   new THREE.Vector2(bodyOuterDiam / 2 - bodyThickness, 0),
   new THREE.Vector2(bodyOuterDiam / 2, 0),
 ];
@@ -150,5 +151,4 @@ function updateGeometry(mesh, geo) {
 }
 
 window.addEventListener("resize", onWindowResize);
-console.log(jetBody.geometry);
 animate();
