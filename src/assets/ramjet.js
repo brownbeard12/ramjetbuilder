@@ -89,7 +89,7 @@ let bodyOuterDiam = 8.0;
 let bodyThickness = 0.5;
 const bodyCross = [
   new THREE.Vector2(bodyOuterDiam / 2, 0),
-  new THREE.Vector2(bodyOuterDiam / 2, 12),
+  new THREE.Vector2(bodyOuterDiam / 2 - 0.5 * bodyThickness, 12),
   new THREE.Vector2(bodyOuterDiam / 2 - bodyThickness, 12),
   new THREE.Vector2(bodyOuterDiam / 2 - bodyThickness, 0),
   new THREE.Vector2(bodyOuterDiam / 2, 0),
@@ -137,4 +137,18 @@ function regen(mesh, val) {
   coneGUI.diffAngle = 2 * (180 / Math.PI) * Math.atan(val.coneRAD / val.coneHT);
 }
 
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function updateGeometry(mesh, geo) {
+  mesh.geometry.dispose();
+  mesh.geometry = geo;
+}
+
+window.addEventListener("resize", onWindowResize);
+console.log(jetBody.geometry);
 animate();
